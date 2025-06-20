@@ -58,3 +58,25 @@ Time 0: a=0
 VCD info: dumpfile dump.vcd opened for output.
 VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
 Time 3: a=5
+
+//4question
+  reg [7:0] a = 0, b = 1, c = 2;
+
+  initial begin
+    a <= #1 b;     // non-blocking
+    b = #2 c;      // blocking with delay
+    c <= #1 a;     // non-blocking
+    #3;
+    
+  end
+  initial
+    begin
+      $dumpfile("dump.vcd");
+    $dumpvars(1);
+      $monitor("a=%0d b=%0d c=%0d %t", a, b, c,$time);
+      #100;
+
+a=0 b=1 c=2                    0
+a=1 b=1 c=2                    1
+a=1 b=2 c=2                    2
+a=1 b=2 c=1                    3
