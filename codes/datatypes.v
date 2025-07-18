@@ -54,15 +54,16 @@ defparam should not be used in synthesizable RTL.
 ✅ Recommended Method: Parameterized Instantiation
 This is the preferred and modern way:
 
-verilog
-Copy
-Edit
+
 module test #(parameter WIDTH=8);
 endmodule
 
 module top;
   test #(.WIDTH(10)) DUT();  // Override WIDTH during instantiation
 endmodule
+
+
+
 module intra_delay_example;
   reg [15:0]y;
   integer b;
